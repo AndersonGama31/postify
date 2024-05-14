@@ -1,16 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { User } from 'src/modules/users/entities/user.entity';
+import { UserPayload } from '../model/user-payload';
+import { User } from '@prisma/client';
 
 interface SignInRequest {
     user: User;
-}
-
-interface UserPayload {
-    sub: string;
-    email: string;
-    name: string;
-    createdAt: string;
 }
 
 @Injectable()
