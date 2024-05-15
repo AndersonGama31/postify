@@ -2,6 +2,7 @@ import { DeletePostUseCase } from '.';
 import { PostRepositoryInMemory } from '../../repositories/post-in-memory';
 import { makePost } from '../../factories/post.factory';
 import { makeUser } from '../../../users/factories/user.factory';
+import { NotFoundException, UnauthorizedException } from '@nestjs/common';
 
 let postRepositoryInMemory: PostRepositoryInMemory;
 let deletePostUseCase: DeletePostUseCase;
@@ -36,12 +37,12 @@ describe('Delete post', () => {
 
         postRepositoryInMemory.posts = [post];
 
-        await expect(
-            deletePostUseCase.execute({
+        expect(async () => {
+            await deletePostUseCase.execute({
                 postId: post.id,
-                userId: 'other-user-id',
-            }),
-        ).rejects.toThrowError('You are not allowed to delete this post');
+                userId: 'non-existing-user-id',
+            });
+        }).rejects.toThrow(UnauthorizedException);
     });
 
     it('Shoud be able to throw an error if post does not exist', async () => {
@@ -51,6 +52,6 @@ describe('Delete post', () => {
                 postId: 'non-existing-post-id',
                 userId: 'user-id',
             });
-        }).rejects.toThrow('Post not found');
+        }).rejects.toThrow(NotFoundException);
     });
 });
