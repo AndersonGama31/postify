@@ -20,7 +20,7 @@ export class PostRepositoryInMemory implements PostRepository {
         this.posts = this.posts.filter((post) => post.id !== id);
     }
 
-    async save(Post: Post): Promise<void> {
+    async update(Post: Post): Promise<void> {
         const postIndex = this.posts.findIndex(
             (currentPost) => currentPost.id === Post.id,
         );

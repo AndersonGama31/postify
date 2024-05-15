@@ -6,7 +6,6 @@ interface EditNoteUseCase {
     title: string;
     content: string;
     authorId: string;
-    noteId: string;
     postId: string;
 }
 
