@@ -23,7 +23,7 @@ describe('Delete post', () => {
 
         await deletePostUseCase.execute({
             postId: post.id,
-            userId: user.id,
+            authorId: user.id,
         });
 
         expect(postRepositoryInMemory.posts).toHaveLength(0);
@@ -40,7 +40,7 @@ describe('Delete post', () => {
         expect(async () => {
             await deletePostUseCase.execute({
                 postId: post.id,
-                userId: 'non-existing-user-id',
+                authorId: 'non-existing-user-id',
             });
         }).rejects.toThrow(UnauthorizedException);
     });
@@ -50,7 +50,7 @@ describe('Delete post', () => {
         expect(async () => {
             await deletePostUseCase.execute({
                 postId: 'non-existing-post-id',
-                userId: 'user-id',
+                authorId: 'user-id',
             });
         }).rejects.toThrow(NotFoundException);
     });

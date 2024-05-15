@@ -15,10 +15,10 @@ import { SignInUseCase } from 'src/modules/auth/use-cases/signin-use-case';
         signOptions: { expiresIn: '1d' },
     })],
     controllers: [AuthController],
-    providers: [LocalStrategy, ValidateUserUseCase, JwtStrategy, SignInUseCase]
+    providers: [LocalStrategy, JwtStrategy, ValidateUserUseCase, SignInUseCase]
 })
 export class AuthModule {
     configure(consumer: MiddlewareConsumer) {
-        consumer.apply(SignInDTOValidateMiddleware).forRoutes('auth');
+        consumer.apply(SignInDTOValidateMiddleware).forRoutes('/signIn');
     }
 }

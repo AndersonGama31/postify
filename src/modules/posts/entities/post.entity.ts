@@ -16,13 +16,17 @@ export class Post {
     constructor(
         props: Replace<
             PostProps,
-            { createdAt?: Date; }
+            {
+                createdAt?: Date;
+                published?: boolean;
+            }
         >,
         id?: string,
     ) {
         this.props = {
             ...props,
             createdAt: props.createdAt ?? new Date(),
+            published: props.published ?? false,
         };
 
         this._id = id || randomUUID();

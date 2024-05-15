@@ -4,11 +4,11 @@ import { Public } from 'src/common/decorators/is-public';
 import { AuthRequestModel } from './model/auth-request.model';
 import { SignInUseCase } from 'src/modules/auth/use-cases/signin-use-case';
 
-@Controller('auth')
+@Controller()
 export class AuthController {
     constructor(private signInUseCase: SignInUseCase) { }
 
-    @Post('signin')
+    @Post('signIn')
     @Public()
     @HttpCode(HttpStatus.OK)
     @UseGuards(AuthGuard('local'))

@@ -1,6 +1,6 @@
 import { PostRepository } from "../../repositories/post.repository";
 import { Post } from "../../entities/post.entity";
-import { NotFoundException, UnauthorizedException } from "@nestjs/common";
+import { Injectable, NotFoundException, UnauthorizedException } from "@nestjs/common";
 
 interface EditNoteUseCase {
     title: string;
@@ -9,6 +9,7 @@ interface EditNoteUseCase {
     postId: string;
 }
 
+@Injectable()
 export class UpdatePostUseCase {
     constructor(private postRepository: PostRepository) { }
 

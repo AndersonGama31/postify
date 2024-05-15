@@ -28,13 +28,7 @@ export class PostRepositoryInMemory implements PostRepository {
         if (postIndex >= 0) this.posts[postIndex] = Post;
     }
 
-    async findManyByUserId(
-        userId: string,
-        page: number,
-        perPage: number,
-    ): Promise<Post[]> {
-        return this.posts
-            .filter((post) => post.authorId === userId)
-            .slice((page - 1) * perPage, page * perPage);
+    async findAll(): Promise<Post[] | []> {
+        return this.posts;
     }
 }
