@@ -7,13 +7,14 @@ interface EditNoteUseCase {
     content: string;
     authorId: string;
     postId: string;
+    banner: string;
 }
 
 @Injectable()
 export class UpdatePostUseCase {
     constructor(private postRepository: PostRepository) { }
 
-    async execute({ authorId, content, title, postId }: EditNoteUseCase): Promise<Post> {
+    async execute({ authorId, content, banner, title, postId }: EditNoteUseCase): Promise<Post> {
         const post = await this.postRepository.findById(postId);
 
         if (!post) throw new NotFoundException('Post not found');
@@ -22,6 +23,7 @@ export class UpdatePostUseCase {
 
         post.title = title;
         post.content = content;
+        post.banner = banner;
 
         await this.postRepository.update(post);
 

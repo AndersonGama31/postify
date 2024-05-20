@@ -9,6 +9,8 @@ export const makeUser = ({ id, ...override }: Override) => {
             email: faker.internet.email(),
             name: faker.person.firstName(),
             password: faker.internet.password(),
+            job: faker.name.jobTitle(),
+            avatar: faker.image.avatar(),
             ...override,
         },
         id,

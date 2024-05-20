@@ -22,6 +22,7 @@ describe('Delete post', () => {
             authorId: post.authorId,
             content: 'New content',
             title: 'New title',
+            banner: 'New banner',
         });
 
         expect(updatedPost.title).toBe('New title');
@@ -38,6 +39,7 @@ describe('Delete post', () => {
                 authorId: 'non-existing-user-id',
                 content: 'New content',
                 title: 'New title',
+                banner: 'New banner',
             });
         }).rejects.toThrow(UnauthorizedException);
     });
@@ -49,6 +51,7 @@ describe('Delete post', () => {
                 authorId: 'user-id',
                 content: 'New content',
                 title: 'New title',
+                banner: 'New banner',
             });
         }).rejects.toThrow(NotFoundException);
     });

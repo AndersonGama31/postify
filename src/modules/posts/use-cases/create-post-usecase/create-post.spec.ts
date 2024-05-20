@@ -17,6 +17,7 @@ describe('Create post', () => {
             authorId: '123',
             content: 'Post content',
             title: 'Post title',
+            banner: 'Post banner'
         });
 
         console.log(post)

@@ -6,6 +6,7 @@ interface PostProps {
     content: string;
     published: boolean;
     authorId: string;
+    banner: string;
     createdAt: Date;
 }
 
@@ -66,5 +67,13 @@ export class Post {
 
     get createdAt(): Date {
         return this.props.createdAt;
+    }
+
+    get banner(): string {
+        return this.props.banner;
+    }
+
+    set banner(banner: string) {
+        this.props.banner = banner;
     }
 }

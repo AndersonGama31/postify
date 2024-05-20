@@ -17,7 +17,9 @@ describe("Create User", () => {
         const user = await createUserUseCase.execute({
             name: "User Test",
             email: "test@test.com",
-            password: "123456"
+            password: "123456",
+            avatar: "avatar",
+            job: "Software Engineer"
         })
 
         expect(userRepositoryInMemory.users).toEqual([user]);
@@ -29,7 +31,9 @@ describe("Create User", () => {
         const user = await createUserUseCase.execute({
             name: "User Test",
             email: "teste@mail.com",
-            password: userPasswordWithoutHash
+            password: userPasswordWithoutHash,
+            avatar: "avatar",
+            job: "Software Engineer"
         });
 
         const userHasPasswordHashed = await compare(userPasswordWithoutHash, user.password)

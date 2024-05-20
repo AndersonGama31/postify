@@ -7,6 +7,7 @@ interface CreatePostRequest {
     authorId: string;
     content: string;
     title: string;
+    banner: string;
 }
 
 @Injectable()
@@ -17,7 +18,8 @@ export class CreatePostUseCase {
         const post = new Post({
             authorId: data.authorId,
             content: data.content,
-            title: data.title
+            title: data.title,
+            banner: data.banner,
         })
         await this.postRepository.create(post);
         return post;

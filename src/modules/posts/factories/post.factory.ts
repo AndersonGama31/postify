@@ -10,6 +10,7 @@ export const makePost = ({ id, ...override }: Override): Post => {
         content: faker.lorem.paragraph(),
         published: false,
         createdAt: faker.date.recent(),
+        banner: faker.image.imageUrl(),
         ...override
     }, id);
 }

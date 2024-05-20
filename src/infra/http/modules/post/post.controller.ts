@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Request } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, Post, Put, Request } from '@nestjs/common';
 import { CreatePostUseCase } from 'src/modules/posts/use-cases/create-post-usecase';
 import { AuthenticatedRequestModel } from '../auth/model/authenticated-request.model';
 import { CreatePostDTO } from './dto/create-post.dto';
@@ -22,11 +22,14 @@ export class PostController {
         @Request() request: AuthenticatedRequestModel,
         @Body() body: CreatePostDTO
     ) {
-        const { content, title } = body;
+        if (!request.user) throw new NotFoundException('User not found');
+
+        const { content, title, banner } = body;
         const post = await this.createPostUseCase.execute({
             content,
             title,
             authorId: request.user.id as string,
+            banner
         });
 
         return PostViewModel.toHttp(post);
@@ -37,12 +40,13 @@ export class PostController {
         @Request() request: AuthenticatedRequestModel,
         @Body() body: UpdatePostDTO
     ) {
-        const { content, title, id } = body;
+        const { content, title, id, banner } = body;
         const post = await this.updatePostUseCase.execute({
             postId: id,
             content,
             title,
             authorId: request.user.id as string,
+            banner
         });
 
         return PostViewModel.toHttp(post);

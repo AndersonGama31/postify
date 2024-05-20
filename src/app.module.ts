@@ -12,7 +12,7 @@ import { PostModule } from './infra/http/modules/post/post.module';
         {
             provide: APP_GUARD,
             useClass: JwtAuthGuard
-        }
+        },
     ]
 })
 export class AppModule { }

@@ -11,12 +11,14 @@ export class UsersController {
     @Post()
     @Public()
     async createUser(@Body() payload: CreateUserDto) {
-        const { name, email, password } = payload;
+        const { name, email, password, avatar, job } = payload;
 
         const user = await this.createUserUseCase.execute({
             name,
             email,
-            password
+            password,
+            avatar,
+            job
         });
 
         return UserViewModel.toHttp(user);
