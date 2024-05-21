@@ -8,6 +8,7 @@ import { SignInDTOValidateMiddleware } from './middlewares/signin-validate.middl
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from 'src/modules/auth/strategies/jwt.strategy';
 import { SignInUseCase } from 'src/modules/auth/use-cases/signin-use-case';
+import { CreateUserUseCase } from 'src/modules/users/use-cases/create-user-usecase';
 
 @Module({
     imports: [UsersModule, DatabaseModule, JwtModule.register({
@@ -15,10 +16,10 @@ import { SignInUseCase } from 'src/modules/auth/use-cases/signin-use-case';
         signOptions: { expiresIn: '1d' },
     })],
     controllers: [AuthController],
-    providers: [LocalStrategy, JwtStrategy, ValidateUserUseCase, SignInUseCase]
+    providers: [LocalStrategy, JwtStrategy, ValidateUserUseCase, SignInUseCase, CreateUserUseCase]
 })
 export class AuthModule {
     configure(consumer: MiddlewareConsumer) {
-        consumer.apply(SignInDTOValidateMiddleware).forRoutes('/signIn');
+        consumer.apply(SignInDTOValidateMiddleware).forRoutes('auth/signIn');
     }
 }

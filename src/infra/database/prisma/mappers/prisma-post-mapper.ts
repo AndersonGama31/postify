@@ -14,14 +14,21 @@ export class PrismaPostMapper {
         };
     }
 
-    static toDomain({ authorId, content, createdAt, published, title, id, banner }: PostRaw): Post {
+    static toDomain({ authorId, content, createdAt, published, title, id, banner, author }: PostRaw & {
+        author: { job: string, avatar: string, name: string }
+    }
+    ): Post {
+        const { job, avatar, name } = author;
         return new Post({
             authorId,
             content,
             createdAt,
             published,
             title,
-            banner
+            banner,
+            job,
+            avatar,
+            name
         }, id
         );
     }

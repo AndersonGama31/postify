@@ -8,6 +8,9 @@ interface PostProps {
     authorId: string;
     banner: string;
     createdAt: Date;
+    job: string;
+    avatar: string;
+    name: string;
 }
 
 export class Post {
@@ -20,6 +23,9 @@ export class Post {
             {
                 createdAt?: Date;
                 published?: boolean;
+                job?: string;
+                avatar?: string;
+                name?: string;
             }
         >,
         id?: string,
@@ -28,6 +34,9 @@ export class Post {
             ...props,
             createdAt: props.createdAt ?? new Date(),
             published: props.published ?? false,
+            job: props.job ?? '',
+            avatar: props.avatar ?? '',
+            name: props.name ?? '',
         };
 
         this._id = id || randomUUID();
@@ -75,5 +84,17 @@ export class Post {
 
     set banner(banner: string) {
         this.props.banner = banner;
+    }
+
+    get job(): string {
+        return this.props.job;
+    }
+
+    get avatar(): string {
+        return this.props.avatar;
+    }
+
+    get name(): string {
+        return this.props.name;
     }
 }

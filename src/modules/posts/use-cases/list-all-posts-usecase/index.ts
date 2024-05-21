@@ -7,7 +7,7 @@ export class ListAllPostsUseCase {
     constructor(private postRepository: PostRepository) { }
 
     async execute(): Promise<Post[] | []> {
-        const posts = await this.postRepository.findAll();
+        const posts = await this.postRepository.findAll()
         return posts;
     }
 }
